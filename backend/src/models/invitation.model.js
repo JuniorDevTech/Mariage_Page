@@ -10,6 +10,7 @@ const invitationSchema = new mongoose.Schema(
     phone: {
       type: String,
       required: true,
+      unique: true,
     },
 
     attendance: {

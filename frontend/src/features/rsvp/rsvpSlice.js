@@ -5,6 +5,7 @@ const initialState = {
   loading: false,
   success: false,
   error: null,
+  message: null,
   invitation: null,
 };
 
@@ -18,17 +19,18 @@ const rsvpSlice = createSlice({
       state.loading = false;
       state.success = false;
       state.error = null;
+      state.message = null;
       state.invitation = null;
     },
   },
 
   extraReducers: (builder) => {
     builder
-
       .addCase(createInvitation.pending, (state) => {
         state.loading = true;
         state.success = false;
         state.error = null;
+        state.message = null;
       })
 
       .addCase(createInvitation.fulfilled, (state, action) => {
@@ -36,7 +38,8 @@ const rsvpSlice = createSlice({
         state.success = true;
         state.error = null;
 
-        state.invitation = action.payload?.data || null;
+        state.message = action.payload.message;
+        state.invitation = action.payload.data;
       })
 
       .addCase(createInvitation.rejected, (state, action) => {

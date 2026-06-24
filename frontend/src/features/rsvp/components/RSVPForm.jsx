@@ -10,7 +10,9 @@ import { resetRSVPState } from "../rsvpSlice";
 const RSVPForm = () => {
   const dispatch = useAppDispatch();
 
-  const { loading, success, error } = useAppSelector((state) => state.rsvp);
+  const { loading, success, error, message } = useAppSelector(
+    (state) => state.rsvp,
+  );
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -167,7 +169,7 @@ const RSVPForm = () => {
         </div>
         {success && (
           <div className="mt-6 rounded-2xl border border-green-300 bg-green-50 p-4 text-green-700">
-            ❤️ Merci ! Votre réponse a été enregistrée avec succès.
+            {message}
           </div>
         )}
         {error && (
