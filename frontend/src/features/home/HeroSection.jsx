@@ -1,9 +1,12 @@
-import heroImage from "../../assets/images/hero.jpeg";
-import heroz from "../../assets/images/jun.jpg.jpeg";
-import { useState } from "react";
+import hero from "../../assets/images/xx.webp";
+import { useState, useEffect } from "react";
 
 export default function HeroSection() {
-  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    const img = new Image();
+    img.src = hero;
+  }, []);
+
   return (
     <section
       id="home"
@@ -19,20 +22,18 @@ export default function HeroSection() {
     >
       {/* Background */}
       <img
-        src={heroz}
+        src={hero}
         alt="Daniel et Lea"
-        onLoad={() => setLoaded(true)}
-        className={`
-          absolute
-          inset-0
-          h-full
-          w-full
-          object-cover
-          object-[center_15%]
-          transition-opacity
-          duration-1000
-          ${loaded ? "opacity-100" : "opacity-0"}
-        `}
+        loading="eager"
+        fetchPriority="high"
+        className="
+    absolute
+    inset-0
+    h-full
+    w-full
+    object-cover
+    object-[center_15%]
+  "
       />
 
       {/* Overlay */}
@@ -88,7 +89,17 @@ export default function HeroSection() {
           ❤️ CONFIRMER MA PRÉSENCE
         </button>
 
-        <div className="mt-20 animate-bounce text-4xl">↓</div>
+        <div className="mt-20 animate-bounce text-4xl">
+          <button
+            onClick={() => {
+              document
+                .getElementById("rsvp")
+                ?.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            ↓
+          </button>
+        </div>
       </div>
     </section>
   );
